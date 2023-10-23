@@ -1,0 +1,35 @@
+{
+  "name": "google-ts-tools",
+  "version": "1.0.0",
+  "description": "Helpers for working with the Google API using Typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jdvober/google-ts-tools.git"
+  },
+  "keywords": [
+    "google",
+    "typescript",
+    "wrapper",
+    "auth",
+    "classroom",
+    "sheets",
+    "forms"
+  ],
+  "author": "Joseph Vober",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jdvober/google-ts-tools/issues"
+  },
+  "homepage": "https://github.com/jdvober/google-ts-tools#readme",
+  "devDependencies": {
+    "@google-cloud/local-auth": "^3.0.0",
+    "googleapis": "^128.0.0",
+    "nodejs": "^0.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
