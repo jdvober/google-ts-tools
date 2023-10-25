@@ -63,7 +63,7 @@ export const saveCredentials = async ( client: Auth.OAuth2Client ) => {
  * Load or request or authorization to call APIs.
  *
  */
-export const authorize = async () => {
+export const Authorize = async () => {
 	let client = await loadSavedCredentialsIfExist()
 	if ( client ) {
 		return client

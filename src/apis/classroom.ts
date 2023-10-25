@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { classroom_v1, google } from "googleapis"
 
 // import { askQuestion } from "./masteryQuiz"
@@ -88,7 +87,7 @@ export const logCourses = ( courses: classroom_v1.Schema$Course[] ) => {
 	console.table( courses, [ "name", "id" ] )
 }
 
-export const getCourses = async ( auth: any ) => {
+export const GetCourses = async ( auth: any ) => {
 	const classroom = google.classroom( { version: "v1", auth } )
 	const courses = await classroom.courses.list( {
 		courseStates: [ "ACTIVE" ],
@@ -103,7 +102,7 @@ export const getCourses = async ( auth: any ) => {
 	}
 }
 
-export const getRoster = ( auth: any, courseId: string ) => {
+export const GetRoster = ( auth: any, courseId: string ) => {
 	// Get the roster for each class
 	return google.classroom( { version: "v1", auth } ).courses.students.list( {
 		courseId: courseId
@@ -111,11 +110,11 @@ export const getRoster = ( auth: any, courseId: string ) => {
 
 }
 
-export const getCourseRoster = ( auth: any, courses: classroom_v1.Schema$Course[], courseChoice: number ) => {
-	return getRoster( courses[ courseChoice ].id as string, auth )
+export const GetCourseRoster = ( auth: any, courses: classroom_v1.Schema$Course[], courseChoice: number ) => {
+	return GetRoster( courses[ courseChoice ].id as string, auth )
 }
 
-export const getAllRosters = async ( auth: any, courseChoices: number[], courses: classroom_v1.Schema$Course[] ) => {
+export const GetAllRosters = async ( auth: any, courseChoices: number[], courses: classroom_v1.Schema$Course[] ) => {
 	//////////////////////////////////
 	// Method 1 - Reading in Series //
 	//////////////////////////////////
@@ -159,13 +158,13 @@ export const getAllRosters = async ( auth: any, courseChoices: number[], courses
 	///////////////////////////////////////////////////////
 	// https://stackoverflow.com/a/48939529
 
-	const promises = courseChoices.map( ( courseChoice ) => { return getCourseRoster( auth, courses, courseChoice ) } )
+	const promises = courseChoices.map( ( courseChoice ) => { return GetCourseRoster( auth, courses, courseChoice ) } )
 	const contents = await Promise.all( promises )
 	const rosters = contents.map( ( roster ) => roster.data.students )
 	return rosters
 }
 
-export const getStudentsNamesFromRosters = ( rosters: any ) => {
+export const GetStudentsNamesFromRosters = ( rosters: any ) => {
 	const students = []
 	for ( const roster of rosters ) {
 		if ( roster ) {
@@ -178,7 +177,7 @@ export const getStudentsNamesFromRosters = ( rosters: any ) => {
 	return students
 }
 
-export const postQuizAllStudentsCourse = ( auth: any, courseId: string, quizOptions: quizOptions ) => {
+export const PostQuizAllStudentsCourse = ( auth: any, courseId: string, quizOptions: quizOptions ) => {
 
 	google.classroom( { version: "v1", auth } ).courses.courseWork.create(
 		{
@@ -199,7 +198,7 @@ export const postQuizAllStudentsCourse = ( auth: any, courseId: string, quizOpti
 	)
 }
 
-export const postQuizIndividualStudent = ( auth: any, courseId: string, quizOptions: quizOptions, studentIds: string[] ) => {
+export const PostQuizIndividualStudent = ( auth: any, courseId: string, quizOptions: quizOptions, studentIds: string[] ) => {
 
 	google.classroom( { version: "v1", auth } ).courses.courseWork.create(
 		{

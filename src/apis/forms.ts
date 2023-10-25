@@ -35,7 +35,7 @@ interface Item {
 		}
 	}
 }
-export const createForm = async ( auth: Auth.OAuth2Client, documentTitle: string = "TestForm", title: string = "TestForm" ) => {
+export const CreateForm = async ( auth: Auth.OAuth2Client, documentTitle: string = "TestForm", title: string = "TestForm" ) => {
 	// export const createForm = async ( title: string, quizQuestions: forms_v1.Schema$Item[], auth: Auth.OAuth2Client ) => {
 	const forms = await google.forms( { version: "v1", auth } )
 
@@ -64,7 +64,7 @@ export const addItems = ( items: forms_v1.Schema$Item[] ) => {
 	} )
 }
 
-export const addQuestionsToForm = async ( auth: Auth.OAuth2Client, formId: string, items: forms_v1.Schema$Item[] ) => {
+export const AddQuestionsToForm = async ( auth: Auth.OAuth2Client, formId: string, items: forms_v1.Schema$Item[] ) => {
 	const forms = await google.forms( { version: "v1", auth } )
 
 	const form = await forms.forms.batchUpdate( {
@@ -80,7 +80,7 @@ export const addQuestionsToForm = async ( auth: Auth.OAuth2Client, formId: strin
 
 }
 
-export const addQuestionToForm = async ( auth: Auth.OAuth2Client, formId: string, item: forms_v1.Schema$Item, locationIndex: number = 0 ) => {
+export const AddQuestionToForm = async ( auth: Auth.OAuth2Client, formId: string, item: forms_v1.Schema$Item, locationIndex: number = 0 ) => {
 	const forms = await google.forms( { version: "v1", auth } )
 
 	const form = await forms.forms.batchUpdate( {
@@ -105,7 +105,7 @@ export const addQuestionToForm = async ( auth: Auth.OAuth2Client, formId: string
 
 }
 
-export const moveQuestion = async ( auth: Auth.OAuth2Client, formId: string, startingIndex: number, newIndex: number ) => {
+export const MoveQuestion = async ( auth: Auth.OAuth2Client, formId: string, startingIndex: number, newIndex: number ) => {
 	const forms = await google.forms( { version: "v1", auth } )
 	const form = await forms.forms.batchUpdate( {
 		formId: formId,
@@ -128,15 +128,15 @@ export const moveQuestion = async ( auth: Auth.OAuth2Client, formId: string, sta
 	return form.data.form?.formId
 }
 
-export const makeImageItem = () => {
+export const MakeImageItem = () => {
 
 }
 
-export const makePageBreakItem = () => {
+export const MakePageBreakItem = () => {
 
 }
 
-export const makeQuestionGroupItem = ( title: string = "Quesion Title", description: string = "Question Description" ): Item => {
+export const MakeQuestionGroupItem = ( title: string = "Quesion Title", description: string = "Question Description" ): Item => {
 	return {
 		title: title,
 		description: description,
@@ -154,7 +154,7 @@ export const makeQuestionGroupItem = ( title: string = "Quesion Title", descript
 	}
 }
 
-export const makeQuestionItem = ( title: string = "Question Title", description: string = "Question Description", isParagraph: boolean = true ): Item => {
+export const MakeQuestionItem = ( title: string = "Question Title", description: string = "Question Description", isParagraph: boolean = true ): Item => {
 	return {
 		title: title,
 		description: description,
@@ -168,7 +168,7 @@ export const makeQuestionItem = ( title: string = "Question Title", description:
 	}
 }
 
-export const makeVideoItem = ( title: string = "Question Title", description: string = "Question Description", caption: string, youtubeUri: string ): Item => {
+export const MakeVideoItem = ( title: string = "Question Title", description: string = "Question Description", caption: string, youtubeUri: string ): Item => {
 	return {
 		title: title,
 		description: description,
@@ -185,6 +185,6 @@ export const makeVideoItem = ( title: string = "Question Title", description: st
 	}
 }
 
-export const makeTextItem = () => {
+export const MakeTextItem = () => {
 
 }
