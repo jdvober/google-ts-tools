@@ -103,33 +103,6 @@ export const getCourses = async ( auth: any ) => {
 	}
 }
 
-// export const chooseCoursePrompt = ( courses: classroom_v1.Schema$Course[] ) => {
-// 	const readline = require( 'readline' ).createInterface( {
-// 		input: process.stdin,
-// 		output: process.stdout
-// 	} )
-
-// 	return new Promise( resolve => readline.question( '\nEnter the index of the course you would like to make an exam for >> ', ( ans: string ) => {
-// 		const index = parseInt( ans )
-// 		const name = courses[ index ].name
-// 		console.log( `OK.  Let's make an exam for ${ name }!` )
-// 		readline.close()
-// 		resolve( index )
-// 	} ) )
-// }
-
-// export const selectCourses = async ( courses: classroom_v1.Schema$Course[] ) => {
-// 	let choices: number[] = []
-// 	let loop = "y"
-// 	while ( loop == "y" || loop == "yes" ) {
-// 		let newChoices: number = await chooseCoursePrompt( courses ) as number
-// 		choices.push( newChoices )
-// 		loop = await askQuestion( "Would you like to add another course? (y/N) >> " ) as string
-// 		if ( loop != "y" && loop != "yes" ) { loop = "N" }
-// 	}
-// 	return choices
-// }
-
 export const getRoster = ( auth: any, courseId: string ) => {
 	// Get the roster for each class
 	return google.classroom( { version: "v1", auth } ).courses.students.list( {
@@ -190,7 +163,6 @@ export const getAllRosters = async ( auth: any, courseChoices: number[], courses
 	const contents = await Promise.all( promises )
 	const rosters = contents.map( ( roster ) => roster.data.students )
 	return rosters
-
 }
 
 export const getStudentsNamesFromRosters = ( rosters: any ) => {
